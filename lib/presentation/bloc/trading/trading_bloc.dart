@@ -1,60 +1,36 @@
-import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:equatable/equatable.dart';
-import 'package:logger/logger.dart';
-import '../../../domain/entities/account.dart';
-import '../../../domain/entities/trade.dart';
-import '../../../domain/usecases/trading/get_account_info.dart';
-import '../../../domain/usecases/trading/execute_trade.dart';
-import '../../../domain/usecases/trading/close_trade.dart';
-
-part 'trading_event.dart';
-part 'trading_state.dart';
+import '../../../domain/usecases/execute_trade.dart';
+import '../../../domain/usecases/get_account_details.dart';
+import '../../../domain/usecases/close_trade.dart';
+import 'trading_event.dart';
+import 'trading_state.dart';
 
 class TradingBloc extends Bloc<TradingEvent, TradingState> {
-  final GetAccountInfo getAccountInfo;
+  final GetAccountDetails getAccountDetails;
   final ExecuteTrade executeTrade;
   final CloseTrade closeTrade;
-  final Logger logger;
 
   TradingBloc({
-    required this.getAccountInfo,
+    required this.getAccountDetails,
     required this.executeTrade,
     required this.closeTrade,
-    required this.logger,
-  }) : super(const TradingState()) {
+  }) : super(TradingInitial()) {
     on<LoadAccount>(_onLoadAccount);
     on<PlaceOrder>(_onPlaceOrder);
     on<ClosePosition>(_onClosePosition);
   }
 
   Future<void> _onLoadAccount(LoadAccount event, Emitter<TradingState> emit) async {
-    emit(state.copyWith(isLoading: true));
-
-    final result = await getAccountInfo();
-
+    emit(TradingLoading());
+    final result = await getAccountDetails();
     result.fold(
-      (failure) {
-        logger.e('Failed to load account: ${failure.message}');
-        emit(state.copyWith(
-          isLoading: false,
-          error: failure.message,
-        ));
-      },
-      (account) {
-        logger.i('Account loaded: ${account.id}');
-        emit(state.copyWith(
-          isLoading: false,
-          account: account,
-          openTrades: const [],
-        ));
-      },
+      (failure) => emit(TradingError(failure.message)),
+      (account) => emit(TradingLoaded(account)),
     );
   }
 
   Future<void> _onPlaceOrder(PlaceOrder event, Emitter<TradingState> emit) async {
-    emit(state.copyWith(isLoading: true));
-
+    emit(TradingLoading());
     final result = await executeTrade(
       instrument: event.instrument,
       units: event.units,
@@ -62,49 +38,17 @@ class TradingBloc extends Bloc<TradingEvent, TradingState> {
       stopLoss: event.stopLoss,
       takeProfit: event.takeProfit,
     );
-
     result.fold(
-      (failure) {
-        logger.e('Failed to place order: ${failure.message}');
-        emit(state.copyWith(
-          isLoading: false,
-          error: failure.message,
-        ));
-      },
-      (trade) {
-        logger.i('Order placed: ${trade.id}');
-        final updatedTrades = List<Trade>.from(state.openTrades)..add(trade);
-        emit(state.copyWith(
-          isLoading: false,
-          openTrades: updatedTrades,
-        ));
-      },
+      (failure) => emit(TradingError(failure.message)),
+      (_) => add(LoadAccount()),
     );
   }
 
   Future<void> _onClosePosition(ClosePosition event, Emitter<TradingState> emit) async {
-    emit(state.copyWith(isLoading: true));
-
     final result = await closeTrade(tradeId: event.tradeId);
-
     result.fold(
-      (failure) {
-        logger.e('Failed to close position: ${failure.message}');
-        emit(state.copyWith(
-          isLoading: false,
-          error: failure.message,
-        ));
-      },
-      (closedTrade) {
-        logger.i('Position closed: ${closedTrade.id}');
-        final updatedTrades = state.openTrades
-            .where((t) => t.id != event.tradeId)
-            .toList();
-        emit(state.copyWith(
-          isLoading: false,
-          openTrades: updatedTrades,
-        ));
-      },
+      (failure) => emit(TradingError(failure.message)),
+      (_) => add(LoadAccount()),
     );
   }
 }
