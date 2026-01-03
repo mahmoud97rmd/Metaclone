@@ -2,6 +2,7 @@
 /// SMA (Simple Moving Average) Calculator
 /// المتوسط المتحرك البسيط
 /// ═══════════════════════════════════════════════════════════
+library;
 
 import 'dart:collection';
 import '../../../domain/entities/candle.dart';

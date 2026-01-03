@@ -2,6 +2,7 @@
 /// UseCase - Base class for all use cases
 /// Clean Architecture Pattern
 /// ═══════════════════════════════════════════════════════════
+library;
 
 import 'package:dartz/dartz.dart';
 import '../errors/failures.dart';

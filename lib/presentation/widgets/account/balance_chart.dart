@@ -2,6 +2,7 @@
 /// Balance Chart
 /// رسم بياني لتطور الرصيد (Placeholder)
 /// ═══════════════════════════════════════════════════════════
+library;
 
 import 'package:flutter/material.dart';
 

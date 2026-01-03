@@ -2,6 +2,7 @@
 /// Indicator Engine
 /// محرك شامل لإدارة جميع المؤشرات
 /// ═══════════════════════════════════════════════════════════
+library;
 
 import 'package:logger/logger.dart';
 

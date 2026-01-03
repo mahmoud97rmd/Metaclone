@@ -2,6 +2,7 @@
 /// Stochastic Oscillator Calculator
 /// مؤشر ستوكاستيك
 /// ═══════════════════════════════════════════════════════════
+library;
 
 import 'dart:collection';
 import 'dart:math';

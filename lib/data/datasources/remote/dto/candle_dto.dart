@@ -1,6 +1,7 @@
 /// ═══════════════════════════════════════════════════════════
 /// Candle DTO - OANDA API Response Format
 /// ═══════════════════════════════════════════════════════════
+library;
 
 import 'package:json_annotation/json_annotation.dart';
 import '../../../models/candle_model.dart';

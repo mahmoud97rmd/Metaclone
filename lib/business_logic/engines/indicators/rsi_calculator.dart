@@ -2,8 +2,8 @@
 /// RSI (Relative Strength Index) Calculator
 /// مؤشر القوة النسبية
 /// ═══════════════════════════════════════════════════════════
+library;
 
-import 'dart:collection';
 import '../../../domain/entities/candle.dart';
 import '../../../domain/entities/indicator.dart';
 import 'base_indicator_calculator.dart';

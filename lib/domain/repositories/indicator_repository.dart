@@ -2,6 +2,7 @@
 /// Indicator Repository Interface
 /// يحدد العقد لحساب المؤشرات الفنية
 /// ═══════════════════════════════════════════════════════════
+library;
 
 import 'package:dartz/dartz.dart';
 

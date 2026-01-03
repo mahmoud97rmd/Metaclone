@@ -9,7 +9,7 @@ class AppConfig {
 
   // Initialize dotenv
   static Future<void> initialize() async {
-    await dotenv.load(fileName: ".env");
+    await dotenv.load(fileName: '.env');
   }
 
   // OANDA Configuration

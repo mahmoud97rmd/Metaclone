@@ -1,6 +1,7 @@
 /// ═══════════════════════════════════════════════════════════
 /// Price DTO - OANDA Streaming Price Format
 /// ═══════════════════════════════════════════════════════════
+library;
 
 import 'package:json_annotation/json_annotation.dart';
 import '../../../models/tick_model.dart';

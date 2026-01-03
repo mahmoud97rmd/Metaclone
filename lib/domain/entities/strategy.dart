@@ -2,6 +2,7 @@
 /// Strategy Entities
 /// كيانات الاستراتيجيات والإشارات
 /// ═══════════════════════════════════════════════════════════
+library;
 
 import 'package:equatable/equatable.dart';
 

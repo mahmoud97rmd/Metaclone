@@ -2,6 +2,7 @@
 /// Chart Widget
 /// عرض الرسم البياني للشموع
 /// ═══════════════════════════════════════════════════════════
+library;
 
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -186,10 +187,10 @@ class _ChartWidgetState extends State<ChartWidget> {
             },
           ),
         ),
-        topTitles: AxisTitles(
+        topTitles: const AxisTitles(
           sideTitles: SideTitles(showTitles: false),
         ),
-        leftTitles: AxisTitles(
+        leftTitles: const AxisTitles(
           sideTitles: SideTitles(showTitles: false),
         ),
         bottomTitles: AxisTitles(
@@ -234,7 +235,7 @@ class _ChartWidgetState extends State<ChartWidget> {
       color: AppTheme.accentColor,
       barWidth: 2,
       isStrokeCapRound: true,
-      dotData: FlDotData(show: false),
+      dotData: const FlDotData(show: false),
       belowBarData: BarAreaData(
         show: true,
         color: AppTheme.accentColor.withOpacity(0.1),

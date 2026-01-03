@@ -1,6 +1,7 @@
 /// ═══════════════════════════════════════════════════════════
 /// Trade DTO - OANDA Trade Response
 /// ═══════════════════════════════════════════════════════════
+library;
 
 import 'package:json_annotation/json_annotation.dart';
 import '../../../../domain/entities/trade.dart';

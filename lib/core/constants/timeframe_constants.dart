@@ -1,6 +1,7 @@
 /// ═══════════════════════════════════════════════════════════
 /// Timeframe Constants - الفترات الزمنية للشموع
 /// ═══════════════════════════════════════════════════════════
+library;
 
 enum Timeframe {
   /// 1 دقيقة
@@ -87,6 +88,6 @@ extension TimeframeExtension on Timeframe {
   
   /// Calculate number of candles in a given duration
   int candleCountForDuration(Duration duration) {
-    return duration.inMilliseconds ~/ this.milliseconds;
+    return duration.inMilliseconds ~/ milliseconds;
   }
 }

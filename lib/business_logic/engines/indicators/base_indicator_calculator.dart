@@ -2,6 +2,7 @@
 /// Base Indicator Calculator
 /// الفئة الأساسية لجميع حاسبات المؤشرات
 /// ═══════════════════════════════════════════════════════════
+library;
 
 import '../../../domain/entities/candle.dart';
 

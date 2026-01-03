@@ -1,6 +1,7 @@
 /// ═══════════════════════════════════════════════════════════
 /// Tick Model
 /// ═══════════════════════════════════════════════════════════
+library;
 
 import 'package:json_annotation/json_annotation.dart';
 import '../../domain/entities/tick.dart';

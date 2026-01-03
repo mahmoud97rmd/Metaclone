@@ -2,6 +2,7 @@
 /// Exceptions - الاستثناءات المخصصة
 /// تستخدم في Data Layer فقط
 /// ═══════════════════════════════════════════════════════════
+library;
 
 /// استثناء الخادم - عندما يفشل الطلب إلى API
 class ServerException implements Exception {

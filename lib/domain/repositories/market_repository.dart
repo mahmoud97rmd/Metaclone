@@ -2,6 +2,7 @@
 /// Market Repository Interface
 /// يحدد العقد (Contract) لجلب بيانات السوق
 /// ═══════════════════════════════════════════════════════════
+library;
 
 import 'package:dartz/dartz.dart';
 

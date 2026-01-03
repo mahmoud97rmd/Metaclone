@@ -2,6 +2,7 @@
 /// Candle Aggregator Engine
 /// يحول Ticks (الأسعار اللحظية) إلى Candles (الشموع)
 /// ═══════════════════════════════════════════════════════════
+library;
 
 import 'dart:async';
 import 'package:logger/logger.dart';

@@ -2,6 +2,7 @@
 /// Candle Model - Data Layer
 /// يمتد من Candle Entity ويضيف JSON Serialization
 /// ═══════════════════════════════════════════════════════════
+library;
 
 import 'package:json_annotation/json_annotation.dart';
 import '../../domain/entities/candle.dart';

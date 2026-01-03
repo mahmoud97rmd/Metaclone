@@ -1,6 +1,7 @@
 /// ═══════════════════════════════════════════════════════════
 /// Chart Events
 /// ═══════════════════════════════════════════════════════════
+library;
 
 import 'package:equatable/equatable.dart';
 import '../../../core/constants/timeframe_constants.dart';

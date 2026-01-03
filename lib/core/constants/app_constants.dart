@@ -2,6 +2,7 @@
 /// App Constants
 /// ثوابت التطبيق
 /// ═══════════════════════════════════════════════════════════
+library;
 
 class AppConstants {
   // Database

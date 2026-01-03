@@ -1,6 +1,7 @@
 /// ═══════════════════════════════════════════════════════════
 /// Indicator Repository Implementation - نسخة مكتملة
 /// ═══════════════════════════════════════════════════════════
+library;
 
 import 'package:dartz/dartz.dart';
 import 'package:logger/logger.dart';
@@ -27,7 +28,7 @@ class IndicatorRepositoryImpl implements IndicatorRepository {
   }) async {
     try {
       if (candles.length < period) {
-        return Left(ValidationFailure(
+        return const Left(ValidationFailure(
           message: 'Not enough candles for EMA calculation',
         ));
       }
@@ -51,7 +52,7 @@ class IndicatorRepositoryImpl implements IndicatorRepository {
   }) async {
     try {
       if (candles.length < period) {
-        return Left(ValidationFailure(
+        return const Left(ValidationFailure(
           message: 'Not enough candles for SMA calculation',
         ));
       }
@@ -75,7 +76,7 @@ class IndicatorRepositoryImpl implements IndicatorRepository {
   }) async {
     try {
       if (candles.length < period + 1) {
-        return Left(ValidationFailure(
+        return const Left(ValidationFailure(
           message: 'Not enough candles for RSI calculation',
         ));
       }
@@ -101,7 +102,7 @@ class IndicatorRepositoryImpl implements IndicatorRepository {
   }) async {
     try {
       if (candles.length < kPeriod) {
-        return Left(ValidationFailure(
+        return const Left(ValidationFailure(
           message: 'Not enough candles for Stochastic calculation',
         ));
       }

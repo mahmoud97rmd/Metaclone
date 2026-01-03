@@ -2,6 +2,7 @@
 /// Network Info
 /// التحقق من حالة الاتصال بالإنترنت
 /// ═══════════════════════════════════════════════════════════
+library;
 
 import 'package:connectivity_plus/connectivity_plus.dart';
 

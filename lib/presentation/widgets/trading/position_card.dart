@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import '../../../core/theme/app_theme.dart';
 import '../../../domain/entities/trade.dart';
 
 class PositionCard extends StatelessWidget {

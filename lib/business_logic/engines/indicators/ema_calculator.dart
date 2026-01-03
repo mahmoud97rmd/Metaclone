@@ -2,6 +2,7 @@
 /// EMA (Exponential Moving Average) Calculator
 /// المتوسط المتحرك الأسي
 /// ═══════════════════════════════════════════════════════════
+library;
 
 import '../../../domain/entities/candle.dart';
 import '../../../domain/entities/indicator.dart';

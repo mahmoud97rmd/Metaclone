@@ -2,6 +2,7 @@
 /// Candle Builder
 /// يبني الشموع من البيانات التاريخية
 /// ═══════════════════════════════════════════════════════════
+library;
 
 import '../../../core/constants/timeframe_constants.dart';
 import '../../../domain/entities/candle.dart';
@@ -61,9 +62,7 @@ class CandleBuilder {
               ? candle.low
               : currentAggregate.low,
           close: candle.close,
-          volume: currentAggregate.volume != null && candle.volume != null
-              ? currentAggregate.volume! + candle.volume!
-              : null,
+          volume: currentAggregate.volume + candle.volume,
           isComplete: candle.isComplete,
         );
       }
