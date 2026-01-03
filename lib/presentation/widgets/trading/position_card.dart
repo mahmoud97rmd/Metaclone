@@ -6,12 +6,7 @@ import '../../../domain/entities/trade.dart';
 class PositionCard extends StatelessWidget {
   final Trade trade;
   final VoidCallback onClose;
-
-  const PositionCard({
-    super.key,
-    required this.trade,
-    required this.onClose,
-  });
+  const PositionCard({super.key, required this.trade, required this.onClose});
 
   @override
   Widget build(BuildContext context) {
@@ -34,15 +29,14 @@ class PositionCard extends StatelessWidget {
                     Container(
                       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                       decoration: BoxDecoration(
-                        color: isBuy ? AppTheme.bullishColor.withOpacity(0.2) : AppTheme.bearishColor.withOpacity(0.2),
+                        color: isBuy ? Colors.green.withOpacity(0.2) : Colors.red.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(4),
                       ),
                       child: Text(
                         isBuy ? 'BUY' : 'SELL',
                         style: TextStyle(
-                          color: isBuy ? AppTheme.bullishColor : AppTheme.bearishColor,
+                          color: isBuy ? Colors.green : Colors.red,
                           fontWeight: FontWeight.bold,
-                          fontSize: 12,
                         ),
                       ),
                     ),
@@ -50,72 +44,45 @@ class PositionCard extends StatelessWidget {
                     Text(trade.instrument, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                   ],
                 ),
-                IconButton(
-                  icon: const Icon(Icons.close, size: 20),
-                  onPressed: onClose,
-                  padding: EdgeInsets.zero,
-                  constraints: const BoxConstraints(),
-                ),
+                IconButton(icon: const Icon(Icons.close), onPressed: onClose),
               ],
             ),
             const SizedBox(height: 12),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(child: _DetailItem(label: 'Volume', value: '${trade.lotSize.toStringAsFixed(2)} Lot')),
-                Expanded(child: _DetailItem(label: 'Entry Price', value: trade.entryPrice.toStringAsFixed(5))),
-              ],
-            ),
-            const SizedBox(height: 8),
-            Row(
-              children: [
-                if (trade.stopLoss != null)
-                  Expanded(child: _DetailItem(label: 'SL', value: trade.stopLoss!.toStringAsFixed(5), color: AppTheme.bearishColor)),
-                if (trade.takeProfit != null)
-                  Expanded(child: _DetailItem(label: 'TP', value: trade.takeProfit!.toStringAsFixed(5), color: AppTheme.bullishColor)),
+                _buildDetail('Volume', '${trade.lotSize.toStringAsFixed(2)} Lot'),
+                _buildDetail('Entry', trade.entryPrice.toStringAsFixed(5)),
               ],
             ),
             const Divider(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text('Profit/Loss:', style: TextStyle(fontSize: 14)),
+                const Text('P/L:', style: TextStyle(fontSize: 14)),
                 Text(
                   '$${profitLoss.toStringAsFixed(2)}',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: isProfit ? AppTheme.profitColor : AppTheme.lossColor,
+                    color: isProfit ? Colors.green : Colors.red,
                   ),
                 ),
               ],
-            ),
-            const SizedBox(height: 8),
-            Text(
-              'Opened: ${DateFormat('yyyy-MM-dd HH:mm').format(trade.openTime)}',
-              style: const TextStyle(fontSize: 11, color: AppTheme.textSecondary),
             ),
           ],
         ),
       ),
     );
   }
-}
 
-class _DetailItem extends StatelessWidget {
-  final String label;
-  final String value;
-  final Color? color;
-
-  const _DetailItem({required this.label, required this.value, this.color});
-
-  @override
-  Widget build(BuildContext context) {
+  Widget _buildDetail(String label, String value) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: const TextStyle(fontSize: 11, color: AppTheme.textSecondary)),
+        Text(label, style: const TextStyle(fontSize: 11, color: Colors.grey)),
         const SizedBox(height: 2),
-        Text(value, style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: color)),
+        Text(value, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
       ],
     );
   }

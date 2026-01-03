@@ -1,18 +1,12 @@
-/// ═══════════════════════════════════════════════════════════
-/// Dio Client
-/// إعداد Dio للطلبات HTTP
-/// ═══════════════════════════════════════════════════════════
-
 import 'package:dio/dio.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-
-import '../constants/api_constants.dart';
+import '../config/app_config.dart';
 
 class DioClient {
+  late final Dio dio;
   final FlutterSecureStorage secureStorage;
   final bool isLive;
-  late final Dio dio;
 
   DioClient({
     required this.secureStorage,
@@ -20,52 +14,30 @@ class DioClient {
   }) {
     dio = Dio(
       BaseOptions(
-        baseUrl: isLive ? ApiConstants.liveBaseUrl : ApiConstants.practiceBaseUrl,
+        baseUrl: AppConfig.instance.baseUrl,
         connectTimeout: const Duration(seconds: 30),
         receiveTimeout: const Duration(seconds: 30),
         headers: {
           'Content-Type': 'application/json',
-          'Accept-Datetime-Format': 'RFC3339',
+          'Authorization': 'Bearer ${AppConfig.instance.token}',
         },
       ),
     );
 
-    // إضافة Interceptors
-    dio.interceptors.add(_AuthInterceptor(secureStorage));
-    dio.interceptors.add(PrettyDioLogger(
-      requestHeader: true,
-      requestBody: true,
-      responseBody: true,
-      responseHeader: false,
-      error: true,
-      compact: true,
-    ));
-  }
-}
-
-/// Interceptor لإضافة Token تلقائياً
-class _AuthInterceptor extends Interceptor {
-  final FlutterSecureStorage secureStorage;
-
-  _AuthInterceptor(this.secureStorage);
-
-  @override
-  Future<void> onRequest(
-    RequestOptions options,
-    RequestInterceptorHandler handler,
-  ) async {
-    final token = await secureStorage.read(key: 'api_token');
-    
-    if (token != null) {
-      options.headers['Authorization'] = 'Bearer $token';
-    }
-
-    handler.next(options);
+    dio.interceptors.add(
+      PrettyDioLogger(
+        requestHeader: true,
+        requestBody: true,
+        responseBody: true,
+        responseHeader: false,
+        error: true,
+        compact: true,
+      ),
+    );
   }
 
-  @override
-  void onError(DioException err, ErrorInterceptorHandler handler) {
-    // TODO: Handle specific error cases
-    handler.next(err);
+  Future<void> updateToken(String token) async {
+    dio.options.headers['Authorization'] = 'Bearer $token';
+    await secureStorage.write(key: 'oanda_token', value: token);
   }
 }

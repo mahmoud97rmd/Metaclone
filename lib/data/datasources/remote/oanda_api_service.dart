@@ -1,9 +1,6 @@
-/// ═══════════════════════════════════════════════════════════
-/// Oanda API Service - مبسط بدون Retrofit
-/// ═══════════════════════════════════════════════════════════
-
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
+import '../../../core/config/app_config.dart';
 
 class OandaApiService {
   final Dio dio;
@@ -14,9 +11,12 @@ class OandaApiService {
     required this.logger,
   });
 
-  // ════════════════════════════════════════════════════════════
-  // Market Data
-  // ════════════════════════════════════════════════════════════
+  String get accountId => AppConfig.instance.accountId;
+
+  Future<Response> getAccount() async {
+    logger.d('Getting account info for: $accountId');
+    return await dio.get('/v3/accounts/$accountId');
+  }
 
   Future<Response> getCandles({
     required String instrument,
@@ -25,84 +25,43 @@ class OandaApiService {
     String? from,
     String? to,
   }) async {
-    try {
-      final queryParams = <String, dynamic>{
-        'granularity': granularity,
-        if (count != null) 'count': count,
-        if (from != null) 'from': from,
-        if (to != null) 'to': to,
-      };
+    final queryParams = {
+      'granularity': granularity,
+      if (count != null) 'count': count.toString(),
+      if (from != null) 'from': from,
+      if (to != null) 'to': to,
+    };
 
-      final response = await dio.get(
-        '/instruments/$instrument/candles',
-        queryParameters: queryParams,
-      );
-
-      return response;
-    } catch (e) {
-      logger.e('Error getting candles', error: e);
-      rethrow;
-    }
+    logger.d('Getting candles for $instrument');
+    return await dio.get(
+      '/v3/instruments/$instrument/candles',
+      queryParameters: queryParams,
+    );
   }
 
   Future<Response> getCurrentPrice(String instrument) async {
-    try {
-      final response = await dio.get('/accounts/{accountId}/pricing',
-          queryParameters: {'instruments': instrument});
-      return response;
-    } catch (e) {
-      logger.e('Error getting price', error: e);
-      rethrow;
-    }
+    logger.d('Getting current price for $instrument');
+    return await dio.get(
+      '/v3/accounts/$accountId/pricing',
+      queryParameters: {'instruments': instrument},
+    );
   }
-
-  // ════════════════════════════════════════════════════════════
-  // Trading
-  // ════════════════════════════════════════════════════════════
 
   Future<Response> createOrder(Map<String, dynamic> orderData) async {
-    try {
-      final response = await dio.post(
-        '/accounts/{accountId}/orders',
-        data: {'order': orderData},
-      );
-      return response;
-    } catch (e) {
-      logger.e('Error creating order', error: e);
-      rethrow;
-    }
-  }
-
-  Future<Response> closePosition(String instrument) async {
-    try {
-      final response = await dio.put(
-        '/accounts/{accountId}/positions/$instrument/close',
-        data: {'longUnits': 'ALL', 'shortUnits': 'ALL'},
-      );
-      return response;
-    } catch (e) {
-      logger.e('Error closing position', error: e);
-      rethrow;
-    }
-  }
-
-  Future<Response> getAccount() async {
-    try {
-      final response = await dio.get('/accounts/{accountId}');
-      return response;
-    } catch (e) {
-      logger.e('Error getting account', error: e);
-      rethrow;
-    }
+    logger.d('Creating order: $orderData');
+    return await dio.post(
+      '/v3/accounts/$accountId/orders',
+      data: {'order': orderData},
+    );
   }
 
   Future<Response> getOpenTrades() async {
-    try {
-      final response = await dio.get('/accounts/{accountId}/openTrades');
-      return response;
-    } catch (e) {
-      logger.e('Error getting trades', error: e);
-      rethrow;
-    }
+    logger.d('Getting open trades');
+    return await dio.get('/v3/accounts/$accountId/openTrades');
+  }
+
+  Future<Response> closeTrade(String tradeId) async {
+    logger.d('Closing trade: $tradeId');
+    return await dio.put('/v3/accounts/$accountId/trades/$tradeId/close');
   }
 }

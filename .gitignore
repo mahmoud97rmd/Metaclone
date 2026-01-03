@@ -47,3 +47,8 @@ app.*.map.json
 # Secrets & API Keys
 lib/core/constants/api_keys.dart
 .env
+
+# Environment variables
+.env
+.env.*
+!.env.example

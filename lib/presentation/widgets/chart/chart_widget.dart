@@ -207,7 +207,7 @@ class _ChartWidgetState extends State<ChartWidget> {
               return Padding(
                 padding: const EdgeInsets.only(top: 8),
                 child: Text(
-                  '${candle.dateTime.hour}:${candle.dateTime.minute.toString().padLeft(2, '0')}',
+                  '${candle.time.hour}:${candle.time.minute.toString().padLeft(2, '0')}',
                   style: const TextStyle(
                     color: AppTheme.textSecondary,
                     fontSize: 10,
