@@ -61,7 +61,8 @@ class PositionCard extends StatelessWidget {
               children: [
                 const Text('P/L:', style: TextStyle(fontSize: 14)),
                 Text(
-                  '$${profitLoss.toStringAsFixed(2)}',
+                  // تصحيح: إضافة باك سلاش قبل علامة الدولار
+                  '\$${profitLoss.toStringAsFixed(2)}',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
