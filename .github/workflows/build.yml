@@ -1,0 +1,241 @@
+name: Android Build
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+  workflow_dispatch:
+
+env:
+  FLUTTER_VERSION: '3.24.0'
+  JAVA_VERSION: '17'
+
+jobs:
+  analyze:
+    name: 🔍 Code Analysis
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+      
+      - name: ☕ Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: 'gradle'
+      
+      - name: 🐦 Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: 'stable'
+          cache: true
+      
+      - name: 📦 Install Dependencies
+        run: flutter pub get
+      
+      - name: 🔐 Create .env File
+        run: |
+          echo "OANDA_PRACTICE_TOKEN=${{ secrets.OANDA_PRACTICE_TOKEN }}" >> .env
+          echo "OANDA_PRACTICE_ACCOUNT_ID=${{ secrets.OANDA_PRACTICE_ACCOUNT_ID }}" >> .env
+          echo "OANDA_LIVE_TOKEN=${{ secrets.OANDA_LIVE_TOKEN }}" >> .env
+          echo "OANDA_LIVE_ACCOUNT_ID=${{ secrets.OANDA_LIVE_ACCOUNT_ID }}" >> .env
+          echo "OANDA_ENVIRONMENT=practice" >> .env
+      
+      - name: 🔨 Run Build Runner
+        run: dart run build_runner build --delete-conflicting-outputs
+      
+      - name: 🔍 Analyze Code
+        run: flutter analyze --no-fatal-infos
+      
+      - name: 🧪 Run Tests
+        run: flutter test --coverage
+        continue-on-error: true
+      
+      - name: 📊 Upload Coverage
+        uses: codecov/codecov-action@v4
+        if: success()
+        with:
+          files: ./coverage/lcov.info
+          fail_ci_if_error: false
+          token: ${{ secrets.CODECOV_TOKEN }}
+
+  build-apk:
+    name: 📦 Build APK
+    needs: analyze
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+      
+      - name: ☕ Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: 'gradle'
+      
+      - name: 🐦 Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: 'stable'
+          cache: true
+      
+      - name: 📦 Install Dependencies
+        run: flutter pub get
+      
+      - name: 🔐 Create .env File
+        run: |
+          echo "OANDA_PRACTICE_TOKEN=demo_token" >> .env
+          echo "OANDA_PRACTICE_ACCOUNT_ID=demo_account" >> .env
+          echo "OANDA_LIVE_TOKEN=demo_token" >> .env
+          echo "OANDA_LIVE_ACCOUNT_ID=demo_account" >> .env
+          echo "OANDA_ENVIRONMENT=practice" >> .env
+      
+      - name: 🔨 Run Build Runner
+        run: dart run build_runner build --delete-conflicting-outputs
+      
+      - name: 🏗️ Build APK (Debug)
+        run: flutter build apk --debug
+      
+      - name: 🏗️ Build APK (Release)
+        run: flutter build apk --release --split-per-abi
+      
+      - name: 📤 Upload Debug APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-debug
+          path: build/app/outputs/flutter-apk/app-debug.apk
+          retention-days: 7
+      
+      - name: 📤 Upload Release APKs
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release-apks
+          path: build/app/outputs/flutter-apk/app-*-release.apk
+          retention-days: 30
+
+  build-aab:
+    name: 📦 Build App Bundle
+    needs: analyze
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+      
+      - name: ☕ Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: ${{ env.JAVA_VERSION }}
+          cache: 'gradle'
+      
+      - name: 🐦 Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: 'stable'
+          cache: true
+      
+      - name: 📦 Install Dependencies
+        run: flutter pub get
+      
+      - name: 🔐 Create .env File
+        run: |
+          echo "OANDA_PRACTICE_TOKEN=demo_token" >> .env
+          echo "OANDA_PRACTICE_ACCOUNT_ID=demo_account" >> .env
+          echo "OANDA_LIVE_TOKEN=demo_token" >> .env
+          echo "OANDA_LIVE_ACCOUNT_ID=demo_account" >> .env
+          echo "OANDA_ENVIRONMENT=practice" >> .env
+      
+      - name: 🔨 Run Build Runner
+        run: dart run build_runner build --delete-conflicting-outputs
+      
+      - name: 🏗️ Build App Bundle
+        run: flutter build appbundle --release
+      
+      - name: 📤 Upload AAB
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-release-bundle
+          path: build/app/outputs/bundle/release/app-release.aab
+          retention-days: 30
+
+  release:
+    name: 🚀 Create GitHub Release
+    needs: [build-apk, build-aab]
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    
+    permissions:
+      contents: write
+    
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+      
+      - name: 📦 Download APKs
+        uses: actions/download-artifact@v4
+        with:
+          name: app-release-apks
+          path: apks/
+      
+      - name: 📦 Download AAB
+        uses: actions/download-artifact@v4
+        with:
+          name: app-release-bundle
+          path: bundle/
+      
+      - name: 📝 Extract Version
+        id: version
+        run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+      
+      - name: 🚀 Create Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Release ${{ steps.version.outputs.VERSION }}
+          files: |
+            apks/*.apk
+            bundle/*.aab
+          draft: false
+          prerelease: false
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  deploy-firebase:
+    name: 🔥 Deploy to Firebase App Distribution
+    needs: build-apk
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    steps:
+      - name: 📥 Checkout Code
+        uses: actions/checkout@v4
+      
+      - name: 📦 Download Debug APK
+        uses: actions/download-artifact@v4
+        with:
+          name: app-debug
+          path: apk/
+      
+      - name: 🔥 Upload to Firebase
+        uses: wzieba/Firebase-Distribution-Github-Action@v1
+        with:
+          appId: ${{ secrets.FIREBASE_APP_ID }}
+          serviceCredentialsFileContent: ${{ secrets.FIREBASE_CREDENTIALS }}
+          groups: testers
+          file: apk/app-debug.apk
+          releaseNotes: |
+            Commit: ${{ github.sha }}
+            Branch: ${{ github.ref_name }}
+            Author: ${{ github.actor }}
