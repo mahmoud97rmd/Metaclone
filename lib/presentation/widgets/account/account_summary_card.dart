@@ -19,14 +19,14 @@ class AccountSummaryCard extends StatelessWidget {
           children: [
             Text('Balance', style: Theme.of(context).textTheme.titleMedium),
             const SizedBox(height: 8),
-            // استخدام صيغة آمنة لعلامة الدولار
-            Text('\$${account.balance.toStringAsFixed(2)}', style: Theme.of(context).textTheme.displayMedium),
+            // استخدام رمز اليونيكود للدولار لتجنب مشاكل التيرمينال
+            Text('\u0024${account.balance.toStringAsFixed(2)}', style: Theme.of(context).textTheme.displayMedium),
             const SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                _buildItem('Equity', '\$${account.equity.toStringAsFixed(2)}', AppTheme.primaryColor),
-                _buildItem('Profit', '\$${account.profit.toStringAsFixed(2)}', profitColor),
+                _buildItem('Equity', '\u0024${account.equity.toStringAsFixed(2)}', AppTheme.primaryColor),
+                _buildItem('Profit', '\u0024${account.profit.toStringAsFixed(2)}', profitColor),
               ],
             ),
           ],

@@ -61,8 +61,8 @@ class PositionCard extends StatelessWidget {
               children: [
                 const Text('P/L:', style: TextStyle(fontSize: 14)),
                 Text(
-                  // صيغة آمنة لعلامة الدولار
-                  '\$${profitLoss.toStringAsFixed(2)}',
+                  // استخدام رمز اليونيكود للدولار هنا أيضاً
+                  '\u0024${profitLoss.toStringAsFixed(2)}',
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
