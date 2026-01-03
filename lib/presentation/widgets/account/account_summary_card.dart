@@ -19,7 +19,7 @@ class AccountSummaryCard extends StatelessWidget {
           children: [
             Text('Balance', style: Theme.of(context).textTheme.titleMedium),
             const SizedBox(height: 8),
-            // تصحيح: إضافة باك سلاش قبل علامة الدولار
+            // استخدام صيغة آمنة لعلامة الدولار
             Text('\$${account.balance.toStringAsFixed(2)}', style: Theme.of(context).textTheme.displayMedium),
             const SizedBox(height: 20),
             Row(
