@@ -1,0 +1,75 @@
+  error • The method 'generateSignal' isn't defined for the type 'StrategyEngine' • lib/business_logic/engines/backtest/backtest_engine.dart:72:43 • undefined_method
+  error • Expected an identifier • lib/business_logic/engines/backtest/backtest_engine.dart:107:49 • missing_identifier
+  error • The argument type 'int' can't be assigned to the parameter type 'DateTime'.  • lib/business_logic/engines/backtest/backtest_engine.dart:127:17 • argument_type_not_assignable
+  error • The named parameter 'lastUpdate' is required, but there's no corresponding argument • lib/business_logic/engines/trading/virtual_account.dart:39:12 • missing_required_argument
+  error • The named parameter 'realizedPL' is required, but there's no corresponding argument • lib/business_logic/engines/trading/virtual_account.dart:39:12 • missing_required_argument
+  error • The named parameter 'unrealizedPL' is required, but there's no corresponding argument • lib/business_logic/engines/trading/virtual_account.dart:39:12 • missing_required_argument
+  error • The named parameter 'usedMargin' is required, but there's no corresponding argument • lib/business_logic/engines/trading/virtual_account.dart:39:12 • missing_required_argument
+  error • The named parameter 'margin' isn't defined • lib/business_logic/engines/trading/virtual_account.dart:43:7 • undefined_named_parameter
+  error • The named parameter 'profit' isn't defined • lib/business_logic/engines/trading/virtual_account.dart:46:7 • undefined_named_parameter
+  error • The method 'toIso8601String' isn't defined for the type 'int' • lib/data/datasources/local/cache/candle_cache_manager.dart:53:27 • undefined_method
+  error • The argument type 'DateTime' can't be assigned to the parameter type 'int'.  • lib/data/datasources/local/cache/candle_cache_manager.dart:65:13 • argument_type_not_assignable
+  error • Target of URI hasn't been generated: 'package:metatrader_clone/data/datasources/remote/dto/account_dto.g.dart' • lib/data/datasources/remote/dto/account_dto.dart:8:6 • uri_has_not_been_generated
+  error • The method '_$OandaAccountResponseFromJson' isn't defined for the type 'OandaAccountResponse' • lib/data/datasources/remote/dto/account_dto.dart:17:7 • undefined_method
+  error • The method '_$OandaAccountResponseToJson' isn't defined for the type 'OandaAccountResponse' • lib/data/datasources/remote/dto/account_dto.dart:19:36 • undefined_method
+  error • The method '_$OandaAccountDtoFromJson' isn't defined for the type 'OandaAccountDto' • lib/data/datasources/remote/dto/account_dto.dart:56:7 • undefined_method
+  error • The method '_$OandaAccountDtoToJson' isn't defined for the type 'OandaAccountDto' • lib/data/datasources/remote/dto/account_dto.dart:58:36 • undefined_method
+  error • Target of URI hasn't been generated: 'package:metatrader_clone/data/datasources/remote/dto/candle_dto.g.dart' • lib/data/datasources/remote/dto/candle_dto.dart:8:6 • uri_has_not_been_generated
+  error • The method '_$OandaCandlesResponseFromJson' isn't defined for the type 'OandaCandlesResponse' • lib/data/datasources/remote/dto/candle_dto.dart:24:7 • undefined_method
+  error • The method '_$OandaCandlesResponseToJson' isn't defined for the type 'OandaCandlesResponse' • lib/data/datasources/remote/dto/candle_dto.dart:26:36 • undefined_method
+  error • The method '_$OandaCandleDtoFromJson' isn't defined for the type 'OandaCandleDto' • lib/data/datasources/remote/dto/candle_dto.dart:49:7 • undefined_method
+  error • The method '_$OandaCandleDtoToJson' isn't defined for the type 'OandaCandleDto' • lib/data/datasources/remote/dto/candle_dto.dart:51:36 • undefined_method
+  error • The method '_$OandaCandleDataDtoFromJson' isn't defined for the type 'OandaCandleDataDto' • lib/data/datasources/remote/dto/candle_dto.dart:86:7 • undefined_method
+  error • The method '_$OandaCandleDataDtoToJson' isn't defined for the type 'OandaCandleDataDto' • lib/data/datasources/remote/dto/candle_dto.dart:88:36 • undefined_method
+  error • Target of URI hasn't been generated: 'package:metatrader_clone/data/datasources/remote/dto/price_dto.g.dart' • lib/data/datasources/remote/dto/price_dto.dart:8:6 • uri_has_not_been_generated
+  error • The method '_$OandaPriceDtoFromJson' isn't defined for the type 'OandaPriceDto' • lib/data/datasources/remote/dto/price_dto.dart:36:7 • undefined_method
+  error • The method '_$OandaPriceDtoToJson' isn't defined for the type 'OandaPriceDto' • lib/data/datasources/remote/dto/price_dto.dart:38:36 • undefined_method
+  error • The method '_$OandaPriceBucketDtoFromJson' isn't defined for the type 'OandaPriceBucketDto' • lib/data/datasources/remote/dto/price_dto.dart:75:7 • undefined_method
+  error • The method '_$OandaPriceBucketDtoToJson' isn't defined for the type 'OandaPriceBucketDto' • lib/data/datasources/remote/dto/price_dto.dart:77:36 • undefined_method
+  error • The method '_$OandaHeartbeatDtoFromJson' isn't defined for the type 'OandaHeartbeatDto' • lib/data/datasources/remote/dto/price_dto.dart:92:7 • undefined_method
+  error • The method '_$OandaHeartbeatDtoToJson' isn't defined for the type 'OandaHeartbeatDto' • lib/data/datasources/remote/dto/price_dto.dart:94:36 • undefined_method
+  error • Target of URI hasn't been generated: 'package:metatrader_clone/data/datasources/remote/dto/trade_dto.g.dart' • lib/data/datasources/remote/dto/trade_dto.dart:9:6 • uri_has_not_been_generated
+  error • The method '_$OandaTradesResponseFromJson' isn't defined for the type 'OandaTradesResponse' • lib/data/datasources/remote/dto/trade_dto.dart:18:7 • undefined_method
+  error • The method '_$OandaTradesResponseToJson' isn't defined for the type 'OandaTradesResponse' • lib/data/datasources/remote/dto/trade_dto.dart:20:36 • undefined_method
+  error • The method '_$OandaTradeDtoFromJson' isn't defined for the type 'OandaTradeDto' • lib/data/datasources/remote/dto/trade_dto.dart:52:7 • undefined_method
+  error • The method '_$OandaTradeDtoToJson' isn't defined for the type 'OandaTradeDto' • lib/data/datasources/remote/dto/trade_dto.dart:54:36 • undefined_method
+  error • Target of URI hasn't been generated: 'package:metatrader_clone/data/models/account_model.g.dart' • lib/data/models/account_model.dart:8:6 • uri_has_not_been_generated
+  error • The method '_$AccountModelFromJson' isn't defined for the type 'AccountModel' • lib/data/models/account_model.dart:29:7 • undefined_method
+  error • The method '_$AccountModelToJson' isn't defined for the type 'AccountModel' • lib/data/models/account_model.dart:31:36 • undefined_method
+  error • Target of URI hasn't been generated: 'package:metatrader_clone/data/models/candle_model.g.dart' • lib/data/models/candle_model.dart:9:6 • uri_has_not_been_generated
+  error • The method '_$CandleModelFromJson' isn't defined for the type 'CandleModel' • lib/data/models/candle_model.dart:26:7 • undefined_method
+  error • The method '_$CandleModelToJson' isn't defined for the type 'CandleModel' • lib/data/models/candle_model.dart:29:36 • undefined_method
+  error • Target of URI hasn't been generated: 'package:metatrader_clone/data/models/tick_model.g.dart' • lib/data/models/tick_model.dart:8:6 • uri_has_not_been_generated
+  error • The method '_$TickModelFromJson' isn't defined for the type 'TickModel' • lib/data/models/tick_model.dart:21:7 • undefined_method
+  error • The method '_$TickModelToJson' isn't defined for the type 'TickModel' • lib/data/models/tick_model.dart:23:36 • undefined_method
+  error • Target of URI hasn't been generated: 'package:metatrader_clone/data/models/trade_model.g.dart' • lib/data/models/trade_model.dart:8:6 • uri_has_not_been_generated
+  error • The method '_$TradeModelFromJson' isn't defined for the type 'TradeModel' • lib/data/models/trade_model.dart:31:7 • undefined_method
+  error • The method '_$TradeModelToJson' isn't defined for the type 'TradeModel' • lib/data/models/trade_model.dart:33:36 • undefined_method
+  error • Missing concrete implementation of 'abstract class MarketRepository.unsubscribeFromLivePrices' • lib/data/repositories/market_repository_impl.dart:15:7 • non_abstract_class_inherits_abstract_member
+  error • The argument type 'DateTime' can't be assigned to the parameter type 'int'.  • lib/data/repositories/market_repository_impl.dart:73:19 • argument_type_not_assignable
+  error • Missing concrete implementation of 'abstract class TradingRepository.watchAccount' • lib/data/repositories/trading_repository_impl.dart:12:7 • non_abstract_class_inherits_abstract_member
+  error • 'TradingRepositoryImpl.getTradeHistory' ('Future<Either<Failure, List<Trade>>> Function()') isn't a valid override of 'TradingRepository.getTradeHistory' ('Future<Either<Failure, List<Trade>>> Function({DateTime? from, int? limit, DateTime? to})') • lib/data/repositories/trading_repository_impl.dart:144:40 • invalid_override
+  error • The named parameter 'lastUpdate' is required, but there's no corresponding argument • lib/data/repositories/trading_repository_impl.dart:163:23 • missing_required_argument
+  error • The named parameter 'realizedPL' is required, but there's no corresponding argument • lib/data/repositories/trading_repository_impl.dart:163:23 • missing_required_argument
+  error • The named parameter 'unrealizedPL' is required, but there's no corresponding argument • lib/data/repositories/trading_repository_impl.dart:163:23 • missing_required_argument
+  error • The named parameter 'usedMargin' is required, but there's no corresponding argument • lib/data/repositories/trading_repository_impl.dart:163:23 • missing_required_argument
+  error • The named parameter 'margin' isn't defined • lib/data/repositories/trading_repository_impl.dart:167:9 • undefined_named_parameter
+  error • The named parameter 'profit' isn't defined • lib/data/repositories/trading_repository_impl.dart:170:9 • undefined_named_parameter
+  error • The argument type 'List<dynamic>' can't be assigned to the parameter type 'List<Candle>?'.  • lib/presentation/bloc/chart/chart_bloc.dart:93:44 • argument_type_not_assignable
+  error • The argument type 'List<dynamic>' can't be assigned to the parameter type 'List<Trade>?'.  • lib/presentation/bloc/trading/trading_bloc.dart:57:23 • argument_type_not_assignable
+  error • The name 'LoadOpenPositions' isn't a class • lib/presentation/pages/positions_page.dart:25:43 • creation_with_non_type
+  error • The name 'LoadOpenPositions' isn't a class • lib/presentation/pages/positions_page.dart:37:53 • creation_with_non_type
+  error • The getter 'openPositions' isn't defined for the type 'TradingState' • lib/presentation/pages/positions_page.dart:48:21 • undefined_getter
+  error • The name 'LoadOpenPositions' isn't a class • lib/presentation/pages/positions_page.dart:73:53 • creation_with_non_type
+  error • The getter 'openPositions' isn't defined for the type 'TradingState' • lib/presentation/pages/positions_page.dart:77:32 • undefined_getter
+  error • The getter 'openPositions' isn't defined for the type 'TradingState' • lib/presentation/pages/positions_page.dart:79:40 • undefined_getter
+  error • The getter 'profit' isn't defined for the type 'Account' • lib/presentation/widgets/account/account_summary_card.dart:15:30 • undefined_getter
+  error • The getter 'profit' isn't defined for the type 'Account' • lib/presentation/widgets/account/account_summary_card.dart:16:39 • undefined_getter
+  error • Expected an identifier • lib/presentation/widgets/account/account_summary_card.dart:33:17 • missing_identifier
+  error • Expected an identifier • lib/presentation/widgets/account/account_summary_card.dart:48:21 • missing_identifier
+  error • Expected an identifier • lib/presentation/widgets/account/account_summary_card.dart:54:21 • missing_identifier
+  error • The getter 'profit' isn't defined for the type 'Account' • lib/presentation/widgets/account/account_summary_card.dart:54:31 • undefined_getter
+  error • The getter 'margin' isn't defined for the type 'Account' • lib/presentation/widgets/account/account_summary_card.dart:78:63 • undefined_getter
+  error • Expected an identifier • lib/presentation/widgets/account/account_summary_card.dart:128:13 • missing_identifier
+  error • The named parameter 'swapAnimationDuration' isn't defined • lib/presentation/widgets/chart/chart_widget.dart:84:15 • undefined_named_parameter
+  error • Expected an identifier • lib/presentation/widgets/trading/position_card.dart:127:21 • missing_identifier
